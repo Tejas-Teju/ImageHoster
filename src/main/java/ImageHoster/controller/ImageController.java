@@ -141,7 +141,9 @@ public class ImageController {
         updatedImage.setDate(new Date());
 
         imageService.updateImage(updatedImage);
-        return "redirect:/images/" + updatedImage.getTitle();
+        //Passing imageID- {id} and image title - {title} when redirecting to /images/{id}/{title} controller
+        // We would be getting 404 error without passing the id and title values
+        return "redirect:/images/" + updatedImage.getId() + '/' + updatedImage.getTitle();
     }
 
 
