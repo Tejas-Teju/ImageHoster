@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+//@Controller annotation is used to tell springBoot that this class is a controller
 @Controller
 public class UserController {
 
@@ -39,8 +39,8 @@ public class UserController {
         return "users/registration";
     }
 
-    //This controller method is called when the request pattern is of type 'users/registration' and also the incoming request is of POST type
-    //This method calls the business logic and after the user record is persisted in the database, directs to login page
+    //This controller method is called when the request pattern is of type 'users/registration' and also the incoming request
+    //is of POST type, This method calls the business logic and after the user record is persisted in the database, directs to login page
     @RequestMapping(value = "users/registration", method = RequestMethod.POST)
     public String registerUser(User user, Model model) {
         //Validation message
@@ -58,8 +58,8 @@ public class UserController {
         return "users/registration"; //Route to registration page in case the password doesn't satisfy the constraints
     }
 
-    // This method is called from the user/registration controller(POST method) to validate if the password entered on registration has
-    // 1 uppercase or lowercase alphabet (a-z or A-Z), 1 number (0-9) and 1 special character other than alphabets (a-z or A-z) and numbers (0-9)
+    //This method is called from the user/registration controller(POST method) to validate if the password entered on registration has
+    //1 uppercase or lowercase alphabet (a-z or A-Z), 1 number (0-9) and 1 special character other than alphabets (a-z or A-z) and numbers (0-9)
     private boolean validatePassword(String password) {
         String expression = "^(?=.*[a-zA-Z])(?=.*?\\d)" + "(?=.*?[`~!@#$%^&*()\\-_=+\\\\|\\[{\\]};:'\",<.>/?]).*$";
         Pattern p = Pattern.compile(expression); // compiling regular expression as we will not change it
@@ -79,8 +79,11 @@ public class UserController {
     }
 
     //This controller method is called when the request pattern is of type 'users/login' and also the incoming request is of POST type
-    //The return type of the business logic is changed to User type instead of boolean type. The login() method in the business logic checks whether the user with entered username and password exists in the database and returns the User type object if user with entered username and password exists in the database, else returns null
-    //If user with entered username and password exists in the database, add the logged in user in the Http Session and direct to user homepage displaying all the images in the application
+    //-The return type of the business logic is changed to User type instead of boolean type. The login() method in the business logic
+    // checks whether the user with entered username and password exists in the database and returns the User type object if user with
+    // entered username and password exists in the database, else returns null
+    //-If user with entered username and password exists in the database, add the logged in user in the Http Session and direct to user
+    // homepage displaying all the images in the application
     //If user with entered username and password does not exist in the database, redirect to the same login page
     @RequestMapping(value = "users/login", method = RequestMethod.POST)
     public String loginUser(User user, HttpSession session) {

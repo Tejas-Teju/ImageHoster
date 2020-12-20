@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
+//@Controller annotation is used to tell springBoot that this class is a controller
 @Controller
 public class HomeController {
 

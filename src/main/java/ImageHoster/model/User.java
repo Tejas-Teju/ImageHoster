@@ -41,6 +41,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Image> images = new ArrayList<>();
 
+    //Below are the getters and setters of the variables of this class
     public Integer getId() {
         return id;
     }

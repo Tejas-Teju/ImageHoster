@@ -18,12 +18,15 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
 
+//@Controller annotation is used to tell springBoot that this class is a controller
 @Controller
 public class ImageController {
 
+    //@Autowired annotation is used for dependency injection where this controller uses imageService
     @Autowired
     private ImageService imageService;
 
+    //@Autowired annotation is used for dependency injection where this controller uses tagService
     @Autowired
     private TagService tagService;
 
@@ -61,7 +64,8 @@ public class ImageController {
     }
 
     //This controller method is called when the request pattern is of type 'images/upload' and also the incoming request is of POST type
-    //The method receives all the details of the image to be stored in the database, and now the image will be sent to the business logic to be persisted in the database
+    //-The method receives all the details of the image to be stored in the database, and now the image will be sent to the business logic
+    // to be persisted in the database
     //After you get the imageFile, set the user of the image by getting the logged in user from the Http Session
     //Convert the image to Base64 format and store it as a string in the 'imageFile' attribute
     //Set the date on which the image is posted
@@ -89,7 +93,8 @@ public class ImageController {
     //This method fetches the image with the corresponding id from the database and adds it to the model with the key as 'image'
     //The method then returns 'images/edit.html' file wherein you fill all the updated details of the image
 
-    //The method first needs to convert the list of all the tags to a string containing all the tags separated by a comma and then add this string in a Model type object
+    //-The method first needs to convert the list of all the tags to a string containing all the tags separated by a comma and
+    // then add this string in a Model type object
     //This string is then displayed by 'edit.html' file as previous tags of an image
     @RequestMapping(value = "/editImage")
     public String editImage(@RequestParam("imageId") Integer imageId, Model model, HttpSession session) {
@@ -112,7 +117,8 @@ public class ImageController {
 
     //This controller method is called when the request pattern is of type 'images/edit' and also the incoming request is of PUT type
     //The method receives the imageFile, imageId, updated image, along with the Http Session
-    //The method adds the new imageFile to the updated image if user updates the imageFile and adds the previous imageFile to the new updated image if user does not choose to update the imageFile
+    //-The method adds the new imageFile to the updated image if user updates the imageFile and adds the previous imageFile to the new updated
+    // image if user does not choose to update the imageFile
     //Set an id of the new updated image
     //Set the user using Http Session
     //Set the date on which the image is posted
@@ -174,9 +180,12 @@ public class ImageController {
         return Base64.getEncoder().encodeToString(file.getBytes());
     }
 
-    //findOrCreateTags() method has been implemented, which returns the list of tags after converting the ‘tags’ string to a list of all the tags and also stores the tags in the database if they do not exist in the database. Observe the method and complete the code where required for this method.
-    //Try to get the tag from the database using getTagByName() method. If tag is returned, you need not to store that tag in the database, and if null is returned, you need to first store that tag in the database and then the tag is added to a list
-    //After adding all tags to a list, the list is returned
+    //-findOrCreateTags() method has been implemented, which returns the list of tags after converting the ‘tags’ string to a
+    // list of all the tags and also stores the tags in the database if they do not exist in the database. Observe the method
+    // and complete the code where required for this method.
+    //-Try to get the tag from the database using getTagByName() method. If tag is returned, you need not to store that tag in
+    // the database, and if null is returned, you need to first store that tag in the database and then the tag is added to a list
+    //-After adding all tags to a list, the list is returned
     private List<Tag> findOrCreateTags(String tagNames) {
         StringTokenizer st = new StringTokenizer(tagNames, ",");
         List<Tag> tags = new ArrayList<Tag>();

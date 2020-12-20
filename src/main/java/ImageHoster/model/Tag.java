@@ -30,9 +30,10 @@ public class Tag {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tags")
     private List<Image> images;
 
-    public Tag() {
+    public Tag() { //Default constructor
     }
 
+    //Below are the getters and setters of the variables of this class
     public Tag(String tagName) {
         this.name = tagName;
     }
