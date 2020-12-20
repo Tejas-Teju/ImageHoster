@@ -67,7 +67,7 @@
         </form>
 
         <!-- A piece of code displaying all the comments to a particular image-->
-        <<div class="comments mt5">
+        <div class="comments mt5">
             <article class="ba b&#45;&#45;black-10 mv4" th:each="comment : ${comments}">
                 <h1 class="f4 bg-light-gray black-80 mv0 pv2 ph3" th:text="${comment.user.username} + ' says'">Title of
                     card</h1>
