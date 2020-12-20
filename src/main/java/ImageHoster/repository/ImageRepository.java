@@ -9,11 +9,9 @@ import java.util.List;
 //The annotation is a special type of @Component annotation which describes that the class defines a data repository
 @Repository
 public class ImageRepository {
-
     //Get an instance of EntityManagerFactory from persistence unit with name as 'imageHoster'
     @PersistenceUnit(unitName = "imageHoster")
     private EntityManagerFactory emf;
-
 
     //The method receives the Image object to be persisted in the database
     //Creates an instance of EntityManager
@@ -109,5 +107,4 @@ public class ImageRepository {
             transaction.rollback();
         }
     }
-
 }

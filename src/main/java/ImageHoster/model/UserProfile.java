@@ -27,9 +27,10 @@ public class UserProfile {
     @Column(name = "mobile_number")
     private String mobileNumber;
 
-    public UserProfile() {
+    public UserProfile() { //Default constructor
     }
 
+    //Below are the getters and setters of the variables of this class
     public Integer getId() {
         return id;
     }

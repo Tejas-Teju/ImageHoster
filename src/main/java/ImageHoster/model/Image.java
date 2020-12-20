@@ -51,9 +51,10 @@ public class Image {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Tag> tags = new ArrayList<>();
 
-    public Image() {
+    public Image() {//Default constructor
     }
 
+    //Constructor used to initialise id, title, imageFile and date
     public Image(int id, String title, String imageFile, Date date) {
         this.id = id;
         this.title = title;
@@ -61,6 +62,7 @@ public class Image {
         this.date = date;
     }
 
+    //Constructor used to initialise id, title, imageFile, description and date
     public Image(int id, String title, String imageFile, String description, Date date) {
         this.id = id;
         this.title = title;
@@ -69,8 +71,7 @@ public class Image {
         this.date = date;
     }
 
-
-
+    //Below are the getters and setters of the variables of this class
     public Integer getId() {
         return id;
     }
