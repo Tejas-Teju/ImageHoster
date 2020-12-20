@@ -149,9 +149,23 @@ public class ImageController {
     //The method calls the deleteImage() method in the business logic passing the id of the image to be deleted
     //Looks for a controller method with request mapping of type '/images'
     @RequestMapping(value = "/deleteImage", method = RequestMethod.DELETE)
-    public String deleteImageSubmit(@RequestParam(name = "imageId") Integer imageId) {
-        imageService.deleteImage(imageId);
-        return "redirect:/images";
+    public String deleteImageSubmit(@RequestParam(name = "imageId") Integer imageId, HttpSession session, Model model) {
+        Image image = imageService.getImage(imageId); //Get an image object by it's ID
+        User user = (User) session.getAttribute("loggeduser"); //Storing the details of current logged-in user
+
+        //Compare the current logged-in user ID and the user ID of the image, if not equal display an error message and route to images/image
+        //as the user is a non-owner of the image
+        if (image.getUser().getId() != user.getId() ) {
+            model.addAttribute("image", image); //View needs image object to diplay image details
+            String error = "Only the owner of the image can delete the image";
+            //if "deleteError" is sent to the UI it displays the error message and it is sent only when non-owner tries to delete the image
+            model.addAttribute("deleteError", error);
+            model.addAttribute("tags", image.getTags()); //View needs tag object to diplay tag details
+            return "images/image";
+        }
+
+        imageService.deleteImage(imageId); //Deletes images from database with the help of imageService
+        return "redirect:/images"; //redirects to images.html to display all the images after deleting the image
     }
 
 
