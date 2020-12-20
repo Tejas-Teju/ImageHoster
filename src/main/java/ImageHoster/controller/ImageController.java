@@ -51,6 +51,8 @@ public class ImageController {
     @RequestMapping("/images/{id}/{title}")
     public String showImage(@PathVariable("id") Integer imageId, @PathVariable("title") String title, Model model) {
         Image image = imageService.getImage(imageId);
+        //comments added to model type object to display an image with comments
+        model.addAttribute("comments", image.getComments());
         model.addAttribute("image", image);
         model.addAttribute("tags", image.getTags());
         return "images/image";
